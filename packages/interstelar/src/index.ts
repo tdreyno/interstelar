@@ -1,7 +1,7 @@
-import isArray = require('lodash.isarray');
-import isPlainObject = require('lodash.isplainobject');
-import isUndefined = require('lodash.isundefined');
-import lodashPartial = require('lodash.partial');
+import isArray = require("lodash.isarray");
+import isPlainObject = require("lodash.isplainobject");
+import isUndefined = require("lodash.isundefined");
+import lodashPartial = require("lodash.partial");
 // import { Map as ImmutableMap } from 'immutable';
 
 interface INode<T> {
@@ -18,7 +18,7 @@ function makeNode<T>(): INode<T> {
   return o;
 }
 
-const mutableObjectCache = new Map<object | Array<any>, string>();
+const mutableObjectCache = new Map<object | any[], string>();
 
 function stringifyIfNecessary<T>(o: T, useEqualityForMutableObjects: boolean): T | string {
   if (
@@ -39,7 +39,7 @@ function stringifyIfNecessary<T>(o: T, useEqualityForMutableObjects: boolean): T
 
       return nextStringKey;
     }
-    
+
     if (
       o instanceof Map ||
       o instanceof Set
@@ -61,11 +61,11 @@ class Cache<T> {
     this.useEqualityForMutableObjects = useEqualityForMutableObjects;
   }
 
-  has(args: Array<any>): boolean {
+  has(args: any[]): boolean {
     return !isUndefined(this.get(args));
   }
 
-  get(args: Array<any>): T | undefined {
+  get(args: any[]): T | undefined {
     let previousNode = this.root;
 
     for (let i = 0; i < args.length; i++) {
@@ -87,7 +87,7 @@ class Cache<T> {
     return previousNode.value;
   }
 
-  set(args: Array<any>, value: T): void {
+  set(args: any[], value: T): void {
     let previousNode = this.root;
 
     for (let i = 0; i < args.length; i++) {
@@ -104,7 +104,7 @@ class Cache<T> {
           node = makeNode<T>();
           previousNode.children = previousNode.children.set(key, node);
         }
-        
+
         if (node) {
           previousNode = node;
         }
@@ -160,7 +160,7 @@ class Cache<T> {
 export function memoize<T extends Function>(fn: T, useEqualityForMutableObjects = false): T {
   const cache = new Cache<Function>(useEqualityForMutableObjects);
 
-  function memoized(...args: Array<any>) {
+  function memoized(...args: any[]) {
     if (cache.has(args)) {
       return cache.get(args);
     }

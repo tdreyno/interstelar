@@ -4,12 +4,12 @@
 //   Record as ImmutableRecord,
 //   Set as ImmutableSet,
 // } from 'immutable';
-import { memoize } from '../index';
+import { memoize } from "../index";
 
 function makeMemoized(useEqualityForMutableObjects = false) {
   const callback = jest.fn();
 
-  const fn = memoize((...args: Array<any>): string => {
+  const fn = memoize((...args: any[]): string => {
     callback(...args);
 
     return `Value: Args Length = ${args.length}`;
@@ -21,25 +21,25 @@ function makeMemoized(useEqualityForMutableObjects = false) {
   };
 }
 
-describe('memoize', () => {
-  it('should memoize primitives', () => {
+describe("memoize", () => {
+  it("should memoize primitives", () => {
     const {
       callback,
       fn,
     } = makeMemoized();
 
     // First run
-    fn(1, 'two', true);
-    fn(1, 'two', true);
+    fn(1, "two", true);
+    fn(1, "two", true);
 
     // Second run
-    fn('two', 1, true);
-    fn('two', 1, true);
+    fn("two", 1, true);
+    fn("two", 1, true);
 
     expect(callback).toHaveBeenCalledTimes(2);
   });
 
-  it('should memoize objects', () => {
+  it("should memoize objects", () => {
     const {
       callback,
       fn,
@@ -74,7 +74,7 @@ describe('memoize', () => {
     expect(callback).toHaveBeenCalledTimes(4);
   });
 
-  it('should memoize objects by equality rather than contents', () => {
+  it("should memoize objects by equality rather than contents", () => {
     const {
       callback,
       fn,
@@ -109,7 +109,7 @@ describe('memoize', () => {
     expect(callback).toHaveBeenCalledTimes(1);
   });
 
-  it('should memoize arrays', () => {
+  it("should memoize arrays", () => {
     const {
       callback,
       fn,
@@ -144,7 +144,7 @@ describe('memoize', () => {
     expect(callback).toHaveBeenCalledTimes(4);
   });
 
-  it('should memoize arrays by equality rather than contents', () => {
+  it("should memoize arrays by equality rather than contents", () => {
     const {
       callback,
       fn,
@@ -179,7 +179,7 @@ describe('memoize', () => {
     expect(callback).toHaveBeenCalledTimes(1);
   });
 
-  it('should memoize zero arguments functions', () => {
+  it("should memoize zero arguments functions", () => {
     const {
       callback,
       fn,
@@ -191,7 +191,7 @@ describe('memoize', () => {
     expect(callback).toHaveBeenCalledTimes(1);
   });
 
-  it('should memoize variadic functions', () => {
+  it("should memoize variadic functions", () => {
     const {
       callback,
       fn,
@@ -201,45 +201,45 @@ describe('memoize', () => {
     const o2: any = { two: 2 };
     const o3: any = { three: 3 };
 
-    expect(fn(o1, o2, o3)).toEqual('Value: Args Length = 3');
-    expect(fn(o1, o2, o3)).toEqual('Value: Args Length = 3');
+    expect(fn(o1, o2, o3)).toEqual("Value: Args Length = 3");
+    expect(fn(o1, o2, o3)).toEqual("Value: Args Length = 3");
 
-    expect(fn(o1, o2)).toEqual('Value: Args Length = 2');
-    expect(fn(o1, o2)).toEqual('Value: Args Length = 2');
+    expect(fn(o1, o2)).toEqual("Value: Args Length = 2");
+    expect(fn(o1, o2)).toEqual("Value: Args Length = 2");
 
-    expect(fn(o1)).toEqual('Value: Args Length = 1');
-    expect(fn(o1)).toEqual('Value: Args Length = 1');
+    expect(fn(o1)).toEqual("Value: Args Length = 1");
+    expect(fn(o1)).toEqual("Value: Args Length = 1");
 
     expect(callback).toHaveBeenCalledTimes(3);
   });
 
-  it('should memoize ES6 Maps', () => {
+  it("should memoize ES6 Maps", () => {
     const {
       callback,
       fn,
     } = makeMemoized();
 
-    const o1 = new Map([['one', 1]]);
-    const o2 = new Map([['two', 2]]);
-    const o3 = new Map([['three', 3]]);
+    const o1 = new Map([["one", 1]]);
+    const o2 = new Map([["two", 2]]);
+    const o3 = new Map([["three", 3]]);
 
     // First run
     fn(o1, o2, o3);
     fn(o1, o2, o3);
 
-    o1.set('one', 11);
+    o1.set("one", 11);
 
     // Second run
     fn(o1, o2, o3);
     fn(o1, o2, o3);
 
-    o2.set('twoMore', 22);
+    o2.set("twoMore", 22);
 
     // Third run
     fn(o1, o2, o3);
     fn(o1, o2, o3);
 
-    o3.delete('three');
+    o3.delete("three");
 
     // Fourth run
     fn(o1, o2, o3);
@@ -248,7 +248,7 @@ describe('memoize', () => {
     expect(callback).toHaveBeenCalledTimes(4);
   });
 
-  it('should memoize ES6 Sets', () => {
+  it("should memoize ES6 Sets", () => {
     const {
       callback,
       fn,
