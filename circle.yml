@@ -14,5 +14,4 @@ dependencies:
 test:
   override:
     - yarn run lint
-    - yarn run nsp
     - yarn test
