@@ -1,0 +1,52 @@
+{
+  "name": "interstelar",
+  "description": "React memoization tools",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "tslint src/**/*.ts",
+    "lint:fix": "tslint src/**/*.ts --fix",
+    "compile": "rm -rf dist && tsc --sourceMap --outDir dist --declaration",
+    "compile:watch": "tsc --sourceMap --outDir dist --declaration --watch"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": "6.10.3"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>/preprocessor.js"
+    },
+    "testMatch": [
+      "**/*.spec.(ts|js)"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/"
+    ]
+  },
+  "dependencies": {
+    "@types/lodash.isarray": "^4.0.0",
+    "@types/lodash.isplainobject": "^4.0.0",
+    "@types/lodash.isundefined": "^3.0.1",
+    "@types/lodash.partial": "^4.2.1",
+    "lodash.isarray": "^4.0.0",
+    "lodash.isplainobject": "^4.0.6",
+    "lodash.isundefined": "^3.0.1",
+    "lodash.partial": "^4.2.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^19.2.4",
+    "jest": "^20.0.3",
+    "tslint": "^5.3.2",
+    "tslint-immutable": "^3.4.2",
+    "typescript": "^2.3.3"
+  }
+}
