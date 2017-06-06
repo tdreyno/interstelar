@@ -5,7 +5,8 @@
     "noImplicitAny": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "lib": ["es6"]
   },
   "exclude": [
     "node_modules",

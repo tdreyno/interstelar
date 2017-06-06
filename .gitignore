@@ -3,8 +3,8 @@ node_modules/
 npm-debug.*
 tmp/
 .tmp/
-dist/
-dist-commonjs/
+dist-es5/
+dist-es6/
 .sw[a-z]
 .DS_Store
 build/
