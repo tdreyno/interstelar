@@ -17,9 +17,6 @@
     "compile:watch": "tsc --sourceMap --outDir dist --declaration --watch"
   },
   "license": "Apache-2.0",
-  "engines": {
-    "node": "6.10.3"
-  },
   "jest": {
     "moduleFileExtensions": [
       "ts",
