@@ -1,7 +1,7 @@
 {
   "name": "interstelar",
   "description": "React memoization tools",
-  "version": "0.0.1-0",
+  "version": "0.0.2-0",
   "main": "dist-es5/index.js",
   "esnext": "dist-es6/index.js",
   "types": "./dist-es5/index.d.ts",
