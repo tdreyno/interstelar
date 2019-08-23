@@ -1,12 +1,68 @@
 {
   "name": "interstelar",
-  "license": "Apache-2.0",
+  "description": "React memoization tools",
+  "version": "0.0.2-0",
   "scripts": {
-    "test": "lerna run test",
-    "lint": "lerna run lint",
-    "canary": "lerna publish --canary --exact --yes --npm-tag dev --force-publish=\"*\""
+    "lint": "tslint --project .",
+    "build": "pika build && yarn compress",
+    "compress": "terser pkg/dist-web/index.js -o pkg/dist-web/index.min.js --source-map",
+    "test": "jest"
+  },
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-ts-standard-pkg",
+        {
+          "exclude": [
+            "__tests__/**/*"
+          ]
+        }
+      ],
+      [
+        "@pika/plugin-build-node"
+      ],
+      [
+        "@pika/plugin-build-web"
+      ]
+    ]
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@types/lodash.isarray": "^4.0.0",
+    "@types/lodash.isplainobject": "^4.0.0",
+    "@types/lodash.isundefined": "^3.0.1",
+    "@types/lodash.partial": "^4.2.1",
+    "lodash.isarray": "^4.0.0",
+    "lodash.isplainobject": "^4.0.6",
+    "lodash.isundefined": "^3.0.1",
+    "lodash.partial": "^4.2.1"
   },
   "devDependencies": {
-    "lerna": "^2.0.0-rc.5"
+    "@pika/pack": "^0.5.0",
+    "@pika/plugin-build-node": "^0.6.0",
+    "@pika/plugin-build-web": "^0.6.0",
+    "@pika/plugin-ts-standard-pkg": "^0.6.0",
+    "@types/jest": "^24.0.0",
+    "jest": "^24.0.0",
+    "terser": "^4.1.4",
+    "ts-jest": "^24.0.0",
+    "tslint": "^5.12.0",
+    "tslint-config-prettier": "^1.17.0",
+    "tslint-immutable": "^6.0.1",
+    "tslint-microsoft-contrib": "^6.1.0",
+    "typescript": "^3.3.3",
+    "husky": "^3.0.0",
+    "lint-staged": "^9.2.0",
+    "prettier": "^1.15.3"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,css,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "volta": {
+    "node": "10.16.3",
+    "yarn": "1.17.3"
   }
 }

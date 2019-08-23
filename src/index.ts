@@ -1,7 +1,7 @@
-import isArray = require("lodash.isarray");
-import isPlainObject = require("lodash.isplainobject");
-import isUndefined = require("lodash.isundefined");
-import lodashPartial = require("lodash.partial");
+import isArray from "lodash.isarray";
+import isPlainObject from "lodash.isplainobject";
+import isUndefined from "lodash.isundefined";
+import lodashPartial from "lodash.partial";
 // import { Map as ImmutableMap } from 'immutable';
 
 interface INode<T> {
@@ -20,30 +20,25 @@ function makeNode<T>(): INode<T> {
 
 const mutableObjectCache = new Map<object | any[], string>();
 
-function stringifyIfNecessary<T>(o: T, useEqualityForMutableObjects: boolean): T | string {
-  if (
-    isArray(o) ||
-    isPlainObject(o) ||
-    o instanceof Map ||
-    o instanceof Set
-  ) {
+function stringifyIfNecessary<T>(
+  o: T,
+  useEqualityForMutableObjects: boolean
+): T | string {
+  if (isArray(o) || isPlainObject(o) || o instanceof Map || o instanceof Set) {
     if (useEqualityForMutableObjects) {
-      const stringKey = mutableObjectCache.get(o);
+      const stringKey = mutableObjectCache.get(o as any);
 
       if (stringKey) {
         return stringKey;
       }
 
       const nextStringKey = mutableObjectCache.size.toString();
-      mutableObjectCache.set(o, nextStringKey);
+      mutableObjectCache.set(o as any, nextStringKey);
 
       return nextStringKey;
     }
 
-    if (
-      o instanceof Map ||
-      o instanceof Set
-    ) {
+    if (o instanceof Map || o instanceof Set) {
       return JSON.stringify(Array.from(o));
     }
 
@@ -68,6 +63,7 @@ class Cache<T> {
   get(args: any[]): T | undefined {
     let previousNode = this.root;
 
+    // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < args.length; i++) {
       const arg = args[i];
       const key = stringifyIfNecessary(arg, this.useEqualityForMutableObjects);
@@ -90,6 +86,7 @@ class Cache<T> {
   set(args: any[], value: T): void {
     let previousNode = this.root;
 
+    // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < args.length; i++) {
       const arg = args[i];
       const key = stringifyIfNecessary(arg, this.useEqualityForMutableObjects);
@@ -133,13 +130,16 @@ class Cache<T> {
       }
 
       if (isPlainObject(data)) {
-        return Object.keys(data).reduce((sum, k: string) => {
-          sum[k] = serialize(data[k]);
+        return Object.keys(data).reduce(
+          (sum, k: string) => {
+            sum[k] = serialize(data[k]);
 
-          return sum;
-        }, {} as {
-          [key: string]: any;
-        });
+            return sum;
+          },
+          {} as {
+            [key: string]: any;
+          }
+        );
       }
 
       if (data && data.toJS) {
@@ -157,8 +157,11 @@ class Cache<T> {
   }
 }
 
-export function memoize<T extends Function>(fn: T, useEqualityForMutableObjects = false): T {
-  const cache = new Cache<Function>(useEqualityForMutableObjects);
+export function memoize<T extends (...args: any[]) => any>(
+  fn: T,
+  useEqualityForMutableObjects = false
+): T {
+  const cache = new Cache<T>(useEqualityForMutableObjects);
 
   function memoized(...args: any[]) {
     if (cache.has(args)) {
