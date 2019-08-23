@@ -7,6 +7,6 @@
     "canary": "lerna publish --canary --exact --yes --npm-tag dev --force-publish=\"*\""
   },
   "devDependencies": {
-    "lerna": "^2.0.0-rc.5"
+    "lerna": "^3.16.4"
   }
 }
