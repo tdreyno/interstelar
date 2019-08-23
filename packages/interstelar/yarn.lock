@@ -13,8 +13,8 @@
     "@types/lodash" "*"
 
 "@types/lodash.isplainobject@^4.0.0":
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/@types/lodash.isplainobject/-/lodash.isplainobject-4.0.2.tgz#804df3a26b6dbc0d7191ee5f89d77a6a8e16e2a5"
+  version "4.0.6"
+  resolved "https://registry.yarnpkg.com/@types/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#757d2dcdecbb32f4452018b285a586776092efd1"
   dependencies:
     "@types/lodash" "*"
 
