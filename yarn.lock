@@ -912,11 +912,12 @@
     rollup "^1.1.0"
     rollup-plugin-babel "^4.3.0"
 
-"@pika/plugin-build-web@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@pika/plugin-build-web/-/plugin-build-web-0.6.0.tgz#ce983eb990ab350ac396a3718fe0400c84b72c2d"
-  integrity sha512-TFbniVFqYcyN2ZKGe4/n/jIgAwDd82sGWhzJKm2n6stN536XC+RW6ewgAgTkz2zBdI0TfzOKib+SiJ8tZz6OxA==
+"@pika/plugin-build-web@^0.8.1":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@pika/plugin-build-web/-/plugin-build-web-0.8.1.tgz#ba519fcd29eed20c1d1091d4083d0be21aa6a5f3"
+  integrity sha512-mRs3kquDb2DS8y7URvMefsZUlz+uhO0n4ykutGmZ+6EslvW1ZjGefOiaQ0qiDDFHF4ir4jg4od7Vo3TU32DGcg==
   dependencies:
+    "@pika/types" "^0.8.1"
     "@types/node" "^10.12.18"
     rollup "^1.1.0"
 
@@ -932,6 +933,11 @@
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/@pika/types/-/types-0.6.0.tgz#eea0ed7db8c2593148a2e2b1bf4cfc25092a78dc"
   integrity sha512-/4ZSVQ94sseV8rCCzdKTpg4tOAL0++UZIaW2sCN4Qy087M/T3N0npgFxOAkLmyoYLs82NDXeq48W5TI1Ra5kNA==
+
+"@pika/types@^0.8.1":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@pika/types/-/types-0.8.1.tgz#ac24b9a73e6712d638cbc124b6b1d6a1ade51bb0"
+  integrity sha512-xQNGUA9CAHmbI6tO9weu088pX3PbrRgYZs68FXAqkJXodNyEy7Ju8LU191MZOS6MZreA1PElPd2evsgQ6Wl/cA==
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
